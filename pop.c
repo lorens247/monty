@@ -1,31 +1,58 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
 #include "monty.h"
 
 /**
-* pop - pops the very top
-* @stack: stack given by main
-* @line_cnt: line number for error messages
+* f_pop - function that prints the top of the stack
+* @head: double head pointer to the stack
+* @counter: line count
 *
-* Return: void
+* Return: nothing
 */
-void pop(stack_t **stack, unsigned int line_cnt)
+void f_pop(stack_t **head, unsigned int counter)
 {
-	stack_t *tmp = NULL;
+	stack_t *h;
 
-	if (!stack || !*stack)
+	if (*head == NULL)
 	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_cnt);
-		status = EXIT_FAILURE;
-		return;
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
 	}
+	h = *head;
+	*head = h->next;
+	free(h);
+}
 
-	tmp = (*stack)->next;
-	free(*stack);
-	*stack = tmp;
-	if (!*stack)
-		return; /* prevents errors cause next line might assign a NULL */
-	(*stack)->prev = NULL;
+/**
+* f_pint - function that prints the top of the stack
+* @head: double head pointer to the stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_pint(stack_t **head, unsigned int counter)
+{
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*head)->n);
+}
+
+/**
+* f_nop - function that does nothing
+* @head: double head pointer to the stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_nop(stack_t **head, unsigned int counter)
+{
+	(void) counter;
+	(void) head;
 }
