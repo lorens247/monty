@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <ctype.h>
+#define UNUSED(x) (void)(x)
 
 /**
 * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -40,7 +41,24 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+#define INSTRUCTIONS { \
+		{"push", push},\
+		{"pall", pall},\
+		{"pint", pint},\
+		{"pop", pop},\
+		{"swap", swap},\
+		{"nop", nop},\
+		{"div", _div},\
+		{"mul", _mul},\
+		{"add", _add},\
+		{"sub", _sub},\
+		{"mod", mod},\
+		{"pchar", pchar},\
+		{"pstr", pstr},\
+		{"rotl", rotl},\
+		{"rotr", rotr},\
+		{NULL, NULL} \
+	}
 /**
 * struct bus_s - variables -args, file, line content
 * @arg: value
@@ -58,6 +76,8 @@ typedef struct bus_s
 	int lifi;
 }  bus_t;
 extern bus_t bus;
+
+extern int status;
 
 char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
 ssize_t getstdin(char **lineptr, int file);
@@ -83,6 +103,9 @@ void addnode(stack_t **head, int n);
 void addqueue(stack_t **head, int n);
 void f_queue(stack_t **head, unsigned int counter);
 void f_stack(stack_t **head, unsigned int counter);
+void pall(stack_t **stack, unsigned int line_cnt);
+void push(stack_t **stack, unsigned int line_number)
+size_t print_stack(const stack_t *stack);
 
 
 #endif

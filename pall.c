@@ -1,3 +1,5 @@
+#define _GNU_SOURCE
+#include <stdio.h>
 #include "monty.h"
 
 /**
@@ -7,7 +9,14 @@
  *
  * Return: void
  */
-void pall(stack_t **stack, unsigned int line_cnt __attribute__((unused)))
+void instruction_pall(stack_t **stack, unsigned int line_number)
 {
-	print_stack(*stack);
+	stack_t *element = *stack;
+
+	UNUSED(line_number);
+	while (element != NULL)
+	{
+		printf("%d\n", element->n);
+		element = element->next;
+	}
 }
