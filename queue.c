@@ -7,7 +7,7 @@
 *
 * Return: nothing
 */
-void f_queue(stack_t **head, unsigned int counter)
+void f_queue(stack_t **head, unsigned int counter);
 {
 	(void)head;
 	(void)counter;
@@ -21,7 +21,7 @@ void f_queue(stack_t **head, unsigned int counter)
 *
 * Return: nothing
 */
-void addqueue(stack_t **head, int n)
+void addqueue(stack_t **head, int n);
 {
 	stack_t *new_node, *temp;
 
