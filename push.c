@@ -8,29 +8,31 @@
  * @line_number: value of new node
  * Return: nothing
  */
-void instruction_push(stack_t **stack, unsigned int line_number)
+void instruction_push(stack_t **stack, unsigned int line_cnt)
 {
-	stack_t *element = malloc(sizeof(stack_t));
-	char *op;
-	int num;
+	char *n = global.argument;
 
-	if (element == NULL)
+	if ((is_digit(n)) == 0)
 	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
+		status = EXIT_FAILURE;
+		return;
 	}
-	op = strtok(NULL, DELIMS);
-	if (op == NULL || stack == NULL)
+
+	if (global.data_struct == 1)
 	{
-		printf("L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		if (!add_node(stack, atoi(global.argument)))
+		{
+			return;
+			status = EXIT_FAILURE;
+		}
 	}
-	num = _strtol(op, line_number);
-	element->n = num;
-	element->prev = NULL;
-	element->next = *stack;
-	if (element->next != NULL)
-		(element->next)->prev = element;
-	*stack = element;
+	else
+	{
+		if (!queue_node(stack, atoi(global.argument)))
+		{
+			return;
+			status = EXIT_FAILURE;
+		}
+	}
 }
-
