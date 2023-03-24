@@ -87,7 +87,8 @@ void addqueue(stack_t **head, int n);
 void f_queue(stack_t **head, unsigned int counter);
 void f_stack(stack_t **head, unsigned int counter);
 void instruction_pall(stack_t **stack, unsigned int line_cnt);
-void instruction_push(stack_t **stack, unsigned int line_cnt);
+void instruction_push(stack_t **stack, unsigned int line_number);
+void instruction_pop(stack_t **stack, unsigned int line_number);
 size_t print_stack(const stack_t *stack);
 
 

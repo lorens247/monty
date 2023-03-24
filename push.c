@@ -1,5 +1,8 @@
 #define _GNU_SOURCE
 #include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /**
@@ -21,7 +24,7 @@ void instruction_push(stack_t **stack, unsigned int line_cnt)
 
 	if (global.data_struct == 1)
 	{
-		if (!add_node(stack, atoi(global.argument)))
+		if (addnode(stack, atoi(global.argument)))
 		{
 			return;
 			status = EXIT_FAILURE;
@@ -29,7 +32,7 @@ void instruction_push(stack_t **stack, unsigned int line_cnt)
 	}
 	else
 	{
-		if (!queue_node(stack, atoi(global.argument)))
+		if (queue_node(stack, atoi(global.argument)))
 		{
 			return;
 			status = EXIT_FAILURE;
