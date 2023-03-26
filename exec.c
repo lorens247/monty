@@ -3,11 +3,11 @@
 /**
 * execute - function that executes the opcode
 * @stack: head stack linked list
-* @counter: count line
+* @counter: line count
 * @file: pointer to monty file stream
 * @content: line content
 *
-* Return: void
+* Return: nothing
 */
 int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 {
